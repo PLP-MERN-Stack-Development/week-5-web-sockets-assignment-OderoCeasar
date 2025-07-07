@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const { OAuth2Client } = require("google-auth-library");
 
 // Register
-export const register = async (req, res) => {
+exports.register = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
     try {
         const existingUser = await user.findOne({ email });
@@ -21,7 +21,7 @@ export const register = async (req, res) => {
 };
 
 // Login
-export const login = async (req, res) => {
+exports.login = async (req, res) => {
     const { email, password } = req.body;
     try {
         const valid = await user.findOne({ email });
@@ -45,7 +45,7 @@ export const login = async (req, res) => {
 };
 
 
-export const validUser = async (req, res) => {
+exports.validUser = async (req, res) => {
     try {
         const validuser = await user
             .findOne({ _id: req.rootUserId })
@@ -62,7 +62,7 @@ export const validUser = async (req, res) => {
 };
 
 
-export const googleAuth = async (req, res) => {
+exports.googleAuth = async (req, res) => {
     try {
         const { tokenId } = req.body;
         const client = new OAuth2Client(process.env.CLIENT_ID);
@@ -101,12 +101,12 @@ export const googleAuth = async (req, res) => {
 };
 
 
-export const logout = (req, res) => {
+exports.logout = (req, res) => {
     req.rootUser.tokens = req.rootUser.tokens.filter((e) => e.token != req.token );
 };
 
 
-export const searchUsers = async (req, res) => {
+exports.searchUsers = async (req, res) => {
     const search = req.query.search
       ? {
         $or: [
@@ -121,7 +121,7 @@ export const searchUsers = async (req, res) => {
 };
 
 
-export const getUserById = async (req, res) => {
+exports.getUserById = async (req, res) => {
     const { id } = req.params;
     try {
         const selectedUser = await useReducer.findOne({ _id: id }).select('-password');
@@ -132,7 +132,7 @@ export const getUserById = async (req, res) => {
 };
 
 
-export const updateInfo = async (req, res) => {
+exports.updateInfo = async (req, res) => {
     const { id } = req.params;
     const { bio, name } = req.body;
     const updateUser = await user.findByIdAndUpdate(id, { name, bio });

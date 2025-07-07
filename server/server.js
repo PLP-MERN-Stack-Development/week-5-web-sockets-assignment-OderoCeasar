@@ -1,7 +1,6 @@
-require.config(dotenv);
+require('dotenv').config();
 const express = require('express');
-const dotenv = require('dotenv');
-const connectDB = require('./config/connection.js');
+const connectDB = require('./config/db.js');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -9,6 +8,7 @@ const userRoutes = require('./routes/user.js');
 const messageRoutes = require('./routes/message.js');
 const chatRoutes = require('./routes/chat.js');
 const Server = require('socket.io');
+
 
 
 

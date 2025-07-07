@@ -13,4 +13,4 @@ router.patch('/groupRemove', Auth, removeFromGroup);
 router.delete('/removeuser', Auth);
 
 
-export default router;
+module.exports = router;

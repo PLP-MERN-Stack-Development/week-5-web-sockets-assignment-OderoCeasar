@@ -2,7 +2,7 @@ const Chat = require('../models/chatModel');
 const user = require('../models/userModel');
 
 
-export const accessChats = async (req, res) =>{
+exports.accessChats = async (req, res) =>{
     const { userId } = req.body;
     if (!userId) res.send({ message: "Provide User's Id" });
     let chatExists = await Chat.find({
@@ -40,7 +40,7 @@ export const accessChats = async (req, res) =>{
 };
 
 
-export const fetchAllChats = async (req, res) => {
+exports.fetchAllChats = async (req, res) => {
     try {
         const chats = await Chat.find({
             users: { $elemMatch: { $eq: req.rootUserId }},
@@ -60,7 +60,7 @@ export const fetchAllChats = async (req, res) => {
 };
 
 
-export const createGroup = async (req, res) => {
+exports.createGroup = async (req, res) => {
     const { chatName, users } = req.body;
     if (!chatName || !users) {
         res.status(400).json({ message: 'Please fill the fields' });
@@ -86,7 +86,7 @@ export const createGroup = async (req, res) => {
 };
 
 
-export const renameGroup = async (req, res) => {
+exports.renameGroup = async (req, res) => {
     const { chatId, chatName } = req.body;
     if (!chatId || !chatName)
         res.status(400).send('Provide Chat id and Chat name');
@@ -106,7 +106,7 @@ export const renameGroup = async (req, res) => {
 
 
 
-export const addToGroup = async (req, res) => {
+exports.addToGroup = async (req, res) => {
     const { userId, chatId } = req.body;
     const existing = await Chat.findOne({ _id: chatId });
     if (!existing.users.includes(userId)) {
@@ -123,7 +123,7 @@ export const addToGroup = async (req, res) => {
 };
 
 
-export const removeFromGroup = async (req, res) => {
+exports.removeFromGroup = async (req, res) => {
     const { userId, chatId } = req.body;
     const existing = await Chat.findOne({ _id: chatId });
     if (existing.users.includes(userId)) {
@@ -140,4 +140,4 @@ export const removeFromGroup = async (req, res) => {
 };
 
 
-export const removeContact = async (req, res) => {};
+exports.removeContact = async (req, res) => {};

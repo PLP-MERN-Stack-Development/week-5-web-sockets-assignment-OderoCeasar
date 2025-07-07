@@ -8,4 +8,4 @@ router.post('/', Auth, sendMessage);
 router.get('/:chatId', Auth, getMessages);
 
 
-export default router;
+module.exports = router;
