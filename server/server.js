@@ -1,7 +1,7 @@
 require.config(dotenv);
 const express = require('express');
 const dotenv = require('dotenv');
-const connectDB = require('./mongoDB/connection');
+const connectDB = require('./config/connection.js');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
