@@ -13,7 +13,7 @@ import Profile from "../components/Profile"
 import { acessCreate } from "../apis/chat.js"
 import "./home.css"
 import { fetchChats, setNotifications } from '../redux/chatsSlice'
-import { getSender } from '../utils/logics'
+import { getSender } from '../utils/logic'
 import { setActiveChat } from '../redux/chatsSlice'
 import Group from '../components/Group'
 import Contacts from '../components/Contacts'
@@ -21,6 +21,9 @@ import { Effect } from "react-notification-badge"
 // import NotificationBadge from 'react-notification-badge/lib/components/NotificationBadge';
 import NotificationBadge from 'react-notification-badge';
 import Search from '../components/group/Search'
+
+
+
 function Home() {
   const dispatch = useDispatch()
   const { showProfile, showNotifications } = useSelector((state) => state.profile)
