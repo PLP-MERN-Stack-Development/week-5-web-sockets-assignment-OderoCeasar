@@ -4,10 +4,10 @@ import { toast } from 'react-toastify';
 
 const API = (token) => 
     axios.create({
-        baseURL: process.env.APP_URL,
+        baseURL: import.meta.env.VITE_APP_URL,
         headers: { Authorization: token },
     });
-let url = process.env.APP_URL;
+let url = import.meta.env.VITE_APP_URL;
 
 export const loginUser = async (body) => {
     try {

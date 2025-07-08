@@ -17,7 +17,7 @@ const corsConfig = {
   origin: process.env.BASE_URL,
   credentials: true,
 };
-const PORT=process.env.PORT || 8000
+const PORT=process.env.PORT || 5000
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,7 +40,7 @@ const server = app.listen(PORT, () => {
 const io = new Server.Server(server, {
   pingTimeout: 60000,
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:5173',
   },
 });
 
