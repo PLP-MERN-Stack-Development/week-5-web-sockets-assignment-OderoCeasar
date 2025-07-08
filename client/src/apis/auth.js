@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from 'react-toastify';
-import { validUser } from "../../../server/controllers/user";
+
 
 const API = (token) => 
     axios.create({
@@ -35,7 +35,7 @@ export const registerUser = async (body) => {
     }
 };
 
-export const vaalidUser = async () => {
+export const validUser = async () => {
     try {
         const token = localStorage.getItem('userToken');
 

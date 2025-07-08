@@ -7,7 +7,7 @@ const API = (token) =>
         headers: { Authorization: token },
     });
 
-export const accessCreate = async (body) => {
+export const acessCreate = async (body) => {
     try {
         const token = localStorage.getItem('userToken');
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setActiveChat, fetchChats } from '../redux/chatsSlice'
 import { useEffect } from 'react'
-import { getChatName, getChatPhoto, timeSince } from '../utils/logics'
+import { getChatName, getChatPhoto, timeSince } from '../utils/logic'
 import NoContacts from './ui/NoContacts'
 // import SkeletonLoading from './ui/SkeletonLoading'
 

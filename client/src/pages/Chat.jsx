@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Model from '../components/Model';
 import { BsEmojiSmile, BsFillEmojiSmileFill } from "react-icons/bs"
@@ -11,7 +11,7 @@ import { fetchChats, setNotifications } from '../redux/chatsSlice';
 import Loading from '../components/ui/Loading';
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
-import { getChatName } from '../utils/logics';
+import { getChatName } from '../utils/logic';
 import Typing from '../components/ui/Typing';
 import { validUser } from '../apis/auth';
 const ENDPOINT = process.env.REACT_APP_SERVER_URL

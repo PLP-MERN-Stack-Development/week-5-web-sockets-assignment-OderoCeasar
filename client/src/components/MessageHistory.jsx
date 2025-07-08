@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import ScrollableFeed from "react-scrollable-feed"
-import { isSameSender, isSameSenderMargin, isSameUser, isLastMessage } from '../utils/logics'
+import { isSameSender, isSameSenderMargin, isSameUser, isLastMessage } from '../utils/logic'
 import { Tooltip } from "@chakra-ui/tooltip";
 import { Avatar } from "@chakra-ui/avatar";
 import "../pages/home.css"

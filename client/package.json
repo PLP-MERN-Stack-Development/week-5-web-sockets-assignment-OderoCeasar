@@ -10,7 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/avatar": "^2.3.0",
     "@chakra-ui/react": "^3.22.0",
+    "@chakra-ui/tooltip": "^2.3.1",
+    "@emoji-mart/data": "^1.2.1",
+    "@emoji-mart/react": "^1.1.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.2.0",
@@ -24,9 +28,11 @@
     "gapi-script": "^1.2.0",
     "react": "18",
     "react-dom": "18",
+    "react-google-login": "^5.2.2",
     "react-icons": "^5.5.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-loading-skeleton": "^3.5.0",
+    "react-notification-badge": "^1.5.1",
     "react-redux": "^9.2.0",
     "react-router": "^7.6.3",
     "react-router-dom": "^7.6.3",
