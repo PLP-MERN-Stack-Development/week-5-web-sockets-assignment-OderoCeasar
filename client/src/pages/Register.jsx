@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { jwtDecode } from 'jwt-decode'
+import {jwtDecode} from 'jwt-decode';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import { googleAuth, registerUser, validUser } from '../apis/auth'
 import { BsEmojiLaughing, BsEmojiExpressionless } from "react-icons/bs"
