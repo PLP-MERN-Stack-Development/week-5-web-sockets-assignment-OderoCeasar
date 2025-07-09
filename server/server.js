@@ -1,5 +1,5 @@
 import express from 'express';
-import dotenv from 'dotenv/config';
+import dotenv from 'dotenv';
 import mongoDBConnect from './mongoDB/connection.js';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
@@ -8,6 +8,8 @@ import userRoutes from './routes/user.js';
 import chatRoutes from './routes/chat.js';
 import messageRoutes from './routes/message.js';
 import * as Server from 'socket.io';
+
+dotenv.config();
 
 const app = express();
 const corsConfig = {

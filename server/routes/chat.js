@@ -10,10 +10,9 @@ import {
   addToGroup,
   removeFromGroup,
 } from '../controllers/chatControllers.js';
+
 router.post('/', Auth, accessChats);
 router.get('/', Auth, fetchAllChats);
-
-
 router.post('/group', Auth, creatGroup);
 router.patch('/group/rename', Auth, renameGroup);
 router.patch('/groupAdd', Auth, addToGroup);
