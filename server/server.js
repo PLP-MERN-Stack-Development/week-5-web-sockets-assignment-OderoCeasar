@@ -1,55 +1,42 @@
-require('dotenv').config();
-const express = require('express');
-const connectDB = require('./config/db.js');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const userRoutes = require('./routes/user.js');
-const messageRoutes = require('./routes/message.js');
-const chatRoutes = require('./routes/chat.js');
-const Server = require('socket.io');
-
-
-
+import express from 'express';
+import dotenv from 'dotenv/config';
+import mongoDBConnect from './mongoDB/connection.js';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import userRoutes from './routes/user.js';
+import chatRoutes from './routes/chat.js';
+import messageRoutes from './routes/message.js';
+import * as Server from 'socket.io';
 
 const app = express();
 const corsConfig = {
-  origin: [process.env.BASE_URL || 'http://localhost:5173'],
+  origin: process.env.BASE_URL,
   credentials: true,
 };
-const PORT=process.env.PORT || 5000
+const PORT=process.env.PORT || 8000
 
-app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(corsConfig));
 app.use('/', userRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/message', messageRoutes);
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', process.env.BASE_URL || 'http://localhost:5173');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
-
-
 mongoose.set('strictQuery', false);
-connectDB();
-
-
+mongoDBConnect();
 const server = app.listen(PORT, () => {
   console.log(`Server Listening at PORT - ${PORT}`);
 });
 
 
+
 const io = new Server.Server(server, {
   pingTimeout: 60000,
   cors: {
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:3000',
   },
 });
+
 
 
 io.on('connection', (socket) => {
