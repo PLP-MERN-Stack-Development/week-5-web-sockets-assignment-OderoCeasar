@@ -2,12 +2,9 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setActiveChat, fetchChats } from '../redux/chatsSlice'
 import { useEffect } from 'react'
-import { getChatName, getChatPhoto, timeSince } from '../utils/logic'
+import { getChatName, getChatPhoto, timeSince } from '../utils/logics'
 import NoContacts from './ui/NoContacts'
 // import SkeletonLoading from './ui/SkeletonLoading'
-
-
-
 var aDay = 24 * 60 * 60 * 1000;
 function Contacts() {
   const { chats, activeChat } = useSelector((state) => state.chats)

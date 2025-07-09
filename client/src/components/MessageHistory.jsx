@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import ScrollableFeed from "react-scrollable-feed"
-import { isSameSender, isSameSenderMargin, isSameUser, isLastMessage } from '../utils/logic'
+import { isSameSender, isSameSenderMargin, isSameUser, isLastMessage } from '../utils/logics'
 import { Tooltip } from "@chakra-ui/tooltip";
 import { Avatar } from "@chakra-ui/avatar";
 import "../pages/home.css"
@@ -54,4 +54,4 @@ function MessageHistory({ messages }) {
   )
 }
 
-export default MessageHistory
+export default MessageHistory;

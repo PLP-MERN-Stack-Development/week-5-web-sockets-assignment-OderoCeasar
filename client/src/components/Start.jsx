@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import { validUser } from '../apis/auth'
 import { useNavigate } from "react-router-dom"
-
-
 function Start() {
   const pageRoute = useNavigate()
   useEffect(() => {

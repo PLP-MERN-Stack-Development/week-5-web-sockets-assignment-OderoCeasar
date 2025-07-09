@@ -44,20 +44,22 @@ function Login() {
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
       setIsLoading(true)
-      const decoded = jwtDecode(credentialResponse.credential)
-      const { email, given_name, family_name } = decoded
-      const response = await googleAuth({ email, firstname: given_name, lastname: family_name })
+      // const decoded = jwtDecode(credentialResponse.credential)
+      // const { email, given_name, family_name } = decoded
+      const response = await googleAuth({ token: credentialResponse.credential });
+
       if (response.data.token) {
         localStorage.setItem("userToken", response.data.token)
         pageRoute("/chats")
       }
-      setIsLoading(false)
-    } catch (err) {
-      console.error(err)
+      
+    } catch (error) {
+      console.error("Error in handling Google Success", error)
       toast.error("Google Sign-in failed!")
-      setIsLoading(false)
+      
     }
-  }
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     const checkUser = async () => {
@@ -106,7 +108,7 @@ function Login() {
             <GoogleLogin
               onSuccess={handleGoogleSuccess}
               onError={() => toast.error("Google Sign-In Failed")}
-              width="100%"
+              width={500}
             />
           </form>
         </div>

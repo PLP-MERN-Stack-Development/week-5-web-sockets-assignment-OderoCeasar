@@ -8,7 +8,7 @@ import { searchUsers } from '../apis/auth';
 import { addToGroup, removeUser, renameGroup } from '../apis/chat';
 import { fetchChats } from '../redux/chatsSlice';
 import Search from './group/Search';
-import { getChatName, getChatPhoto } from '../utils/logic';
+import { getChatName, getChatPhoto } from '../utils/logics';
 const style = {
   position: 'absolute',
   top: '50%',

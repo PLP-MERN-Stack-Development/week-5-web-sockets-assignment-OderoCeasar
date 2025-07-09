@@ -68,21 +68,21 @@ export const validUser = async (req, res) => {
 
 export const googleAuth = async (req, res) => {
   try {
-    const { tokenId } = req.body;
+    const { token } = req.body;
     const client = new OAuth2Client(process.env.CLIENT_ID);
     const verify = await client.verifyIdToken({
-      idToken: tokenId,
+      idToken: token,
       audience: process.env.CLIENT_ID,
     });
     const { email_verified, email, name, picture } = verify.payload;
     if (!email_verified) res.json({ message: 'Email Not Verified' });
     const userExist = await user.findOne({ email }).select('-password');
     if (userExist) {
-      res.cookie('userToken', tokenId, {
+      res.cookie('userToken', token, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
       });
-      res.status(200).json({ token: tokenId, user: userExist });
+      res.status(200).json({ token: token, user: userExist });
     } else {
       const password = email + process.env.CLIENT_ID;
       const newUser = await user({
@@ -92,13 +92,13 @@ export const googleAuth = async (req, res) => {
         email,
       });
       await newUser.save();
-      res.cookie('userToken', tokenId, {
+      res.cookie('userToken', token, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
       });
       res
         .status(200)
-        .json({ message: 'User registered Successfully', token: tokenId });
+        .json({ message: 'User registered Successfully', token: token });
     }
   } catch (error) {
     res.status(500).json({ error: error });
