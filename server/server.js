@@ -8,8 +8,17 @@ import userRoutes from './routes/user.js';
 import chatRoutes from './routes/chat.js';
 import messageRoutes from './routes/message.js';
 import * as Server from 'socket.io';
+import fs from "fs";
+
+if (!fs.existsSync(".env")) {
+  console.log(".env file not found");
+} else {
+  console.log(".env file found")
+}
 
 dotenv.config();
+console.log("JWT Secret:", process.env.SECRET);
+
 
 const app = express();
 const corsConfig = {
@@ -32,10 +41,12 @@ const server = app.listen(PORT, () => {
 
 
 
+
 const io = new Server.Server(server, {
   pingTimeout: 60000,
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:5173',
+    
   },
 });
 

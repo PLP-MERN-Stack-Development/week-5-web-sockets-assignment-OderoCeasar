@@ -31,11 +31,21 @@ export const googleAuth = async (token) => {
 
 
 
-export const registerUser = async (body) => {
+// export const registerUser = async (body) => {
+//   try {
+//     return await axios.post(`${url}/auth/register`, body);
+//   } catch (error) {
+//     console.log('error in register api');
+//   }
+// };
+
+export const registerUser = async (formData) => {
   try {
-    return await axios.post(`${url}/auth/register`, body);
+    const response = await axios.post("http://localhost:5000/auth/register", formData);
+    return response; 
   } catch (error) {
-    console.log('error in register api');
+    console.error("Register API failed:", error.response?.data || error.message);
+    throw error; 
   }
 };
 

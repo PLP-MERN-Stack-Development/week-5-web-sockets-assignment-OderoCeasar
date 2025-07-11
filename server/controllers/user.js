@@ -12,7 +12,14 @@ export const register = async (req, res) => {
       return res.status(400).json({ error: 'User already Exits' });
     const fullname = firstname + ' ' + lastname;
     const newuser = new user({ email, password, name: fullname });
-    const token = await newuser.generateAuthToken();
+    // const token = await newuser.generateAuthToken();
+    let token;
+    try {
+      token = await newuser.generateAuthToken();
+    } catch (err) {
+      console.error("Token generation failed in the controller:", err.message);
+      return res.status(500).json({ error: "Token generation failed"});
+    }
     await newuser.save();
     res.json({ message: 'success', token: token });
   } catch (error) {

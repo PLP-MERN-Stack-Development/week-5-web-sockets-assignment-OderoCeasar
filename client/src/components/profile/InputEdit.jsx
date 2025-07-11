@@ -1,48 +1,33 @@
-import React, { useState } from "react";
-import { TbEdit } from "react-icons/tb";
-import { BsCheck2 } from "react-icons/bs";
+import React from 'react'
+import SkeletonLoading from '../ui/SkeletonLoading'
+import "../../pages/home.css"
+function Search({ type, isLoading, searchResults, handleClick, search }) {
 
+  return (
+    <div className={`${search ? "scrollbar-hide overflow-y-scroll h-[250px] mb-5 bg-[#fff] flex flex-col gap-y-3 pt-3" : "hidden"}`}>
 
+      {
+        isLoading ? <SkeletonLoading height={55} count={3} /> : (
+          searchResults.length > 0 ? searchResults?.map((e) => {
+            return (
+              <div key={e._id} className='flex items-center justify-between'>
+                <div className='flex items-center gap-x-2'>
 
-function InputEdit({ type, handleChange, input, handleSubmit }) {
-    const [editable, setEditable] = useState(false);
+                  <img className='w-[42px] h-[42px] rounded-[25px]' src={!e.profilePic ? "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" : e.profilePic} alt="" />
+                  <div className='flex flex-col gap-y-[1px]'>
+                    <h5 className='text-[15px] text-[#111b21] tracking-wide font-medium'>{e.name}</h5>
+                    <h5 className='text-[12px] text-[#68737c] tracking-wide font-normal'>{e.email}</h5>
+                  </div>
+                </div>
+                <button onClick={() => handleClick(e)} className='bg-[#0086ea] px-3 py-2 text-[10.6px] tracking-wide text-[#fff]'>Add</button>
+              </div>
+            )
+          }) : <span className='text-[13px]'>No results found</span>
+        )
 
-    const submitButton = () => {
-        handleSubmit()
-        setEditable(false)
-    }
-
-    return (
-        <div>
-            <div className="flex flex-col py-4 mt-4 bg-[#fff] shadow-md px-4 gap-y-3">
-                <p className="text-[12px] text-[#166e48] font-medium tracking-wide">Your name</p>
-                {
-                    !editable ? 
-                        <div className="flex justify-between items-center">
-                            <p className="text-[14.5px] text-[#3b4a54]">
-                                {input}
-                            </p>
-
-                            <button onClick={() => setEditable(!editable)}>
-                                <TbEdit className="w-[21px] h-[21px]" />
-                            </button>
-                        </div>
-
-                        : <div className="flex items-center justify-between">
-                            <div>
-                                <input name={type} onChange={handleChange} className="text-[14.5px] text-[#3b4a54] outline-0" type="text" value={input} />
-                            </div>
-                            <div className="flex items-center gap-x-4">
-                                <button onClick={submitButton}>
-                                    <BsCheck2 className="w-[21px] h-[21px]" />
-                                </button>
-                            </div>
-                        </div>
-                }
-            </div>
-        </div>
-    )
+      }
+    </div>
+  )
 }
 
-
-export default InputEdit;
+export default Search;

@@ -24,26 +24,39 @@ function Register() {
   }
 
   const handleOnSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
+  e.preventDefault();
+  setIsLoading(true);
 
-    if (formData.email.includes("@") && formData.password.length > 6) {
-      const { data } = await registerUser(formData)
-      if (data?.token) {
-        localStorage.setItem("userToken", data.token)
-        toast.success("Successfully Registered 😍")
-        setIsLoading(false)
-        pageRoute("/chats")
+  if (formData.email.includes("@") && formData.password.length > 6) {
+    try {
+      const response = await registerUser(formData);
+      const { data } = response;
+
+      if (data.token) {
+        localStorage.setItem("userToken", data.token);
+        toast.success("Successfully Registered 😍");
+        pageRoute("/chats");
       } else {
-        setIsLoading(false)
-        toast.error("Invalid Credentials!")
+        toast.error("Registration failed");
       }
-    } else {
-      setIsLoading(false)
-      toast.warning("Provide valid Credentials!")
-      setFormData({ ...formData, password: "" })
+    } catch (err) {
+      console.error("Error in register API:", err.response?.data || err.message);
+
+      if (err.response?.status === 400 && err.response?.data?.error === "User already Exits") {
+        toast.error("User already exists. Try logging in instead.");
+      } else {
+        toast.error("Something went wrong during registration.");
+      }
+    } finally {
+      setIsLoading(false);
     }
+  } else {
+    setIsLoading(false);
+    toast.warning("Provide valid credentials!");
+    setFormData({ ...formData, password: "" });
   }
+};
+
 
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
@@ -107,7 +120,7 @@ function Register() {
             <GoogleLogin
               onSuccess={handleGoogleSuccess}
               onError={() => toast.error("Google Sign-In Failed")}
-              width="100%"
+              width={500}
             />
           </form>
         </div>

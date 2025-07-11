@@ -4,8 +4,8 @@ import { toast } from 'react-toastify';
 
 const API = (token) =>
   axios.create({
-    baseURL: process.env.REACT_APP_SERVER_URL,
-    headers: { Authorization: token },
+    baseURL: import.meta.env.VITE_APP_URL,
+    headers: { Authorization: `Bearer ${token}` },
   });
 export const acessCreate = async (body) => {
   try {
@@ -26,9 +26,18 @@ export const fetchAllChats = async () => {
     const { data } = await API(token).get('/api/chat');
     return data;
   } catch (error) {
-    console.log('error in fetch all chats api');
+    if (error.response) {
+      console.error('API Error Response:', error.response.data);
+      console.error('Status Code:', error.response.status);
+    } else if (error.request) {
+      console.error('No response from server:', error.request);
+    } else {
+      console.error('Error in fetchAllChats:', error.message);
+    }
+    throw error; 
   }
 };
+
 
 
 export const createGroup = async (body) => {
@@ -38,7 +47,9 @@ export const createGroup = async (body) => {
     toast.success(`${data.chatName} Group Created`);
     return data;
   } catch (error) {
-    console.log('error in create group api');
+    console.log('error in create group api:', error.response?.data || error.message);
+    toast.error("Failed to create group");
+    return null;
   }
 };
 
